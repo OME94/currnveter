@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Welcome To CurrnVerter - The CURRency coNVERTER !!!</title>
+    <link rel="stylesheet" type="text/css" href="currnverter.css">
+    <script type="text/javascript" src="index.js"></script>
+</head>
+
+<body>
+    <header>
+        <h1><strong> CurrnVerter</strong> </h1>
+    </header>
+    <section id="converter-calculator">
+        <div id="screen">
+            <div id="screen-top">
+                <form class="screen-forms" id="convert-from-form">
+                    <input name="convert-from" id="convert-from" list="currencies">
+                    <datalist id="currencies">
+                        <option value="GBP">
+                        <option value="GHC">
+                        <option value="CFA">
+                        <option value="EUR">
+                        <option value="NGN">
+                        <option value="USD">
+                        <option value="YEN">
+                    </datalist>
+                </form>
+                <div class="converts" id="amount"></div>
+            </div>
+            <div id="screen-bottom">
+                <form class="screen-forms" id="convert-to-form">
+                    <input name="convert-to" id="convert-to" list="currencies">
+                </form>
+                <div class="converts" id="exchange"></div>
+            </div>
+        </div>
+
+        <div id="buttons">
+           <button class="input-btn">1</button>
+           <button class="input-btn">2</button>
+           <button class="input-btn">3</button>
+           <button class="input-btn">4</button>
+           <button class="input-btn">5</button>
+           <button class="input-btn">6</button>
+           <button class="input-btn">7</button>
+           <button class="input-btn">8</button>
+           <button class="input-btn">9</button>
+           <button class="input-btn">.</button>
+           <button class="input-btn">0</button>
+           <button class="input-btn">&larr;<br>del</button>
+        </div>
+    </section>
+</body>
+
+</html>
