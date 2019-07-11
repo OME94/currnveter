@@ -18,3 +18,22 @@ self.addEventListener('message', event => {
 self.addEventListener('fetch', event => {
     console.log(event);
 });
+
+/*
+self.registration.showNotification('Notification Title', {
+    //Notification options
+    body: 'text'
+    badge:
+    icon:
+    image //backgroundimage
+    tag: 'text'
+    renotify //true/false
+    data: {}
+    requireInteraction: true/false
+    actions: [{action:'id',title:'',icon:'/path/to/img.ext'},{},...{}]
+    silent: true/false
+    sound:'/path'
+    vibrate: [start, stop, continue, stop,...]
+    **
+});
+*/
