@@ -5,32 +5,31 @@ TO ADD : (1) THE SCREEN SHOULD BE ABLE TO ACCOMODATE THE
 */
 window.addEventListener('DOMContentLoaded', () => {
   console.log('loaded');
-  const convertTo = document.querySelector('convert-to');
-  const convertFrom = document.querySelector('convert-from');
-  console.log(`${convertFrom}__ __ ${convertTo}`);
+  const convertTo = document.querySelector('#convert-to');
+  const convertFrom = document.querySelector('#convert-from');
     
-  const apis = {
-    fixer: {
-      key: '4ef21a789fe4c083e06322f19d53395d',
-      endpoints: {
-        latest: `http://data.fixer.io/api/latest?access_key=4ef21a789fe4c083e06322f19d53395d`,
-        /*
-        history: `http://data.fixer.io/api/${year}-${month}-${day}?access_key=4ef21a789fe4c083e06322f19d53395d&symbols=${symbols}`,
-        convert: `http://data.fixer.io/api/convert?access_key=4ef21a789fe4c083e06322f19d53395d&from=${convertFrom}&to=${convertTo}&amount=${amount}`,
-        histConvert: `http://data.fixer.io/api/convert?access_key=4ef21a789fe4c083e06322f19d53395d&from=${convertFrom}&to=${convertTo}&amount=${amount}&date=${year}-${month}-${day}`,
-        timeseries: `http://data.fixer.io/api/timeseries?access_key=4ef21a789fe4c083e06322f19d53395d&start_date=${start_year}-${start_month}-${start_day}&end_date=${end_year}-${end_month}-${end_day}&base=${base}&symbols=${symbols}`
-        */
-      }
-    },
-    currconv: {
-      key: '887c2d2a138031828c49',
-      url: `http://free.currencyconverterapi.com/api/v7/convert?q=${convertFrom.value}_${convertTo.value}&compact=ultra&apiKey=887c2d2a138031828c49`
-    }
-  };
   
   const rates = () => {
     // ***************       TODO       ****************
     //DISPLAY A MESSAGE TO INDICATE ABSENCE OF CONVERSION
+        const apis = {
+          fixer: {
+            key: '4ef21a789fe4c083e06322f19d53395d',
+            endpoints: {
+              latest: `http://data.fixer.io/api/latest?access_key=4ef21a789fe4c083e06322f19d53395d`,
+              /*
+              history: `http://data.fixer.io/api/${year}-${month}-${day}?access_key=4ef21a789fe4c083e06322f19d53395d&symbols=${symbols}`,
+              convert: `http://data.fixer.io/api/convert?access_key=4ef21a789fe4c083e06322f19d53395d&from=${convertFrom}&to=${convertTo}&amount=${amount}`,
+              histConvert: `http://data.fixer.io/api/convert?access_key=4ef21a789fe4c083e06322f19d53395d&from=${convertFrom}&to=${convertTo}&amount=${amount}&date=${year}-${month}-${day}`,
+              timeseries: `http://data.fixer.io/api/timeseries?access_key=4ef21a789fe4c083e06322f19d53395d&start_date=${start_year}-${start_month}-${start_day}&end_date=${end_year}-${end_month}-${end_day}&base=${base}&symbols=${symbols}`
+              */
+            }
+          },
+          currconv: {
+            key: '887c2d2a138031828c49',
+            url: `http://free.currencyconverterapi.com/api/v7/convert?q=${convertFrom.value}_${convertTo.value}&compact=ultra&apiKey=887c2d2a138031828c49`
+          }
+        };
     //RATES 'if' CONVERSION RATES ARE NOT YET SELECTED OR 
     //JUST ONE RATE IS SELECTED.
     
