@@ -27,7 +27,7 @@ window.addEventListener('DOMContentLoaded', () => {
           },
           currconv: {
             key: '887c2d2a138031828c49',
-            url: `http://free.currencyconverterapi.com/api/v7/convert?q=${convertFrom.value}_${convertTo.value}&compact=ultra&apiKey=887c2d2a138031828c49`
+            url: `http://free.currconv.com/api/v7/convert?q=${convertFrom.value}_${convertTo.value}&compact=ultra&apiKey=887c2d2a138031828c49`
           }
         };
     //RATES 'if' CONVERSION RATES ARE NOT YET SELECTED OR 
@@ -36,11 +36,26 @@ window.addEventListener('DOMContentLoaded', () => {
     //if(convertFrom === convertTo || convertFrom === null || convertTo ===null)
     
     //      DO THIS ONLY WHEN ALL CONVERSION RATES ARE SELECTED
-    return fetch(apis.fixer.endpoints.latest).then(
-      response => JSON.parse(response)
-      ).catch(error => {
+    return fetch(apis.currconv.url).then(
+      response => response.json()
+      ).then(data => {
+        console.log(data);
+        const amount = document.querySelector('#amount').textContent;
+        const exchange = document.querySelector('#exchange');
+        const value = data[`${convertFrom.value}_${convertTo.value}`];
+        exchange.textContent = amount * value
+      }).catch(error => {
         console.log(error);
-        return fetch(api.currconv.url).then(response => JSON.parse(response));
+        fetch(api.fixer.endpoints.latest).then(
+          response => response.json()
+          ).then(data => {
+            console.log(`fixer: ${data}`);
+            const amount = document.querySelector('#amount').textContent;
+            const exchange = document.querySelector('#exchange');
+            const val = convertTo.value;
+            
+            exchange.textContent = amount * data[`${val}`];
+          });
       });
     };
     
@@ -51,8 +66,6 @@ window.addEventListener('DOMContentLoaded', () => {
       form.onchange = rates;
     });
     
-    const amount = document.querySelector('#amount');
-    const exchange = document.querySelector('#exchange');
     const buttons = document.querySelectorAll('.input-btn');
     forEach.call(buttons, button => {
       button.onclick = () => {
@@ -63,12 +76,8 @@ window.addEventListener('DOMContentLoaded', () => {
         
         if(amount.textContent.length < 1)
           return exchange.textContent = '';
-          
-        let amt = parseInt(amount.textContent),
-        val = convertTo.value;
-        console.log(`${convertFrom}_${convertFrom.value}
-          ${convertTo}_${convertTo.value}`);
-        exchange.textContent = amt * rates()[`${val}`];
+
+        rates();
     };
   });
 });
