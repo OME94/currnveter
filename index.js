@@ -48,7 +48,7 @@ window.addEventListener('DOMContentLoaded', () => {
         console.log(error);
         fetch(api.fixer.endpoints.latest).then(
           response => response.json()
-          ).then({rates} => {
+          ).then(({rates}) => {
             console.log(`fixer: ${rates}`);
             const amount = document.querySelector('#amount').textContent;
             const exchange = document.querySelector('#exchange');
