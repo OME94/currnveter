@@ -16,7 +16,7 @@ window.addEventListener('DOMContentLoaded', () => {
           fixer: {
             key: '4ef21a789fe4c083e06322f19d53395d',
             endpoints: {
-              latest: `http://data.fixer.io/api/latest?access_key=4ef21a789fe4c083e06322f19d53395d`,
+              latest: `https://data.fixer.io/api/latest?access_key=4ef21a789fe4c083e06322f19d53395d`,
               /*
               history: `http://data.fixer.io/api/${year}-${month}-${day}?access_key=4ef21a789fe4c083e06322f19d53395d&symbols=${symbols}`,
               convert: `http://data.fixer.io/api/convert?access_key=4ef21a789fe4c083e06322f19d53395d&from=${convertFrom}&to=${convertTo}&amount=${amount}`,
@@ -27,7 +27,7 @@ window.addEventListener('DOMContentLoaded', () => {
           },
           currconv: {
             key: '887c2d2a138031828c49',
-            url: `http://free.currconv.com/api/v7/convert?q=${convertFrom.value}_${convertTo.value}&compact=ultra&apiKey=887c2d2a138031828c49`
+            url: `https://free.currconv.com/api/v7/convert?q=${convertFrom.value}_${convertTo.value}&compact=ultra&apiKey=887c2d2a138031828c49`
           }
         };
     //RATES 'if' CONVERSION RATES ARE NOT YET SELECTED OR 
@@ -48,13 +48,13 @@ window.addEventListener('DOMContentLoaded', () => {
         console.log(error);
         fetch(api.fixer.endpoints.latest).then(
           response => response.json()
-          ).then(data => {
-            console.log(`fixer: ${data}`);
+          ).then({rates} => {
+            console.log(`fixer: ${rates}`);
             const amount = document.querySelector('#amount').textContent;
             const exchange = document.querySelector('#exchange');
             const val = convertTo.value;
             
-            exchange.textContent = amount * data[`${val}`];
+            exchange.textContent = amount * rates[`${val}`];
           });
       });
     };
