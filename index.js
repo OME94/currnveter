@@ -7,63 +7,70 @@ window.addEventListener('DOMContentLoaded', () => {
   console.log('loaded');
   const convertTo = document.querySelector('#convert-to');
   const convertFrom = document.querySelector('#convert-from');
-    
   
-  const rates = () => {
+  const rates = {};
+  const getRate = () => {
     // ***************       TODO       ****************
     //DISPLAY A MESSAGE TO INDICATE ABSENCE OF CONVERSION
-        const apis = {
-          fixer: {
-            key: '4ef21a789fe4c083e06322f19d53395d',
-            endpoints: {
-              latest: `https://data.fixer.io/api/latest?access_key=4ef21a789fe4c083e06322f19d53395d`,
-              /*
-              history: `http://data.fixer.io/api/${year}-${month}-${day}?access_key=4ef21a789fe4c083e06322f19d53395d&symbols=${symbols}`,
-              convert: `http://data.fixer.io/api/convert?access_key=4ef21a789fe4c083e06322f19d53395d&from=${convertFrom}&to=${convertTo}&amount=${amount}`,
-              histConvert: `http://data.fixer.io/api/convert?access_key=4ef21a789fe4c083e06322f19d53395d&from=${convertFrom}&to=${convertTo}&amount=${amount}&date=${year}-${month}-${day}`,
-              timeseries: `http://data.fixer.io/api/timeseries?access_key=4ef21a789fe4c083e06322f19d53395d&start_date=${start_year}-${start_month}-${start_day}&end_date=${end_year}-${end_month}-${end_day}&base=${base}&symbols=${symbols}`
-              */
-            }
-          },
-          currconv: {
-            key: '887c2d2a138031828c49',
-            url: `https://free.currconv.com/api/v7/convert?q=${convertFrom.value}_${convertTo.value}&compact=ultra&apiKey=887c2d2a138031828c49`
-          }
-        };
+    const apis = {
+      fixer: {
+        key: '4ef21a789fe4c083e06322f19d53395d',
+        endpoints: {
+          latest: `https://data.fixer.io/api/latest?access_key=4ef21a789fe4c083e06322f19d53395d`,
+          /*
+          history: `http://data.fixer.io/api/${year}-${month}-${day}?access_key=4ef21a789fe4c083e06322f19d53395d&symbols=${symbols}`,
+          convert: `http://data.fixer.io/api/convert?access_key=4ef21a789fe4c083e06322f19d53395d&from=${convertFrom}&to=${convertTo}&amount=${amount}`,
+          histConvert: `http://data.fixer.io/api/convert?access_key=4ef21a789fe4c083e06322f19d53395d&from=${convertFrom}&to=${convertTo}&amount=${amount}&date=${year}-${month}-${day}`,
+          timeseries: `http://data.fixer.io/api/timeseries?access_key=4ef21a789fe4c083e06322f19d53395d&start_date=${start_year}-${start_month}-${start_day}&end_date=${end_year}-${end_month}-${end_day}&base=${base}&symbols=${symbols}`
+          */
+        }
+      },
+      currconv: {
+        key: '887c2d2a138031828c49',
+        url: `https://free.currconv.com/api/v7/convert?q=${convertFrom.value}_${convertTo.value}&compact=ultra&apiKey=887c2d2a138031828c49`
+      }
+    };
     //RATES 'if' CONVERSION RATES ARE NOT YET SELECTED OR 
     //JUST ONE RATE IS SELECTED.
     
     //if(convertFrom === convertTo || convertFrom === null || convertTo ===null)
     
+    const amount = document.querySelector('#amount').textContent;
+    const exchange = document.querySelector('#exchange');
+    const pair = `${convertFrom.value}_${convertTo.value}`
+    
     //      DO THIS ONLY WHEN ALL CONVERSION RATES ARE SELECTED
-    return fetch(apis.currconv.url).then(
+    if(rates[pair]){
+      exchange.textContent = amount * rates[pair];
+      return;
+    }
+    else{
+      return fetch(apis.currconv.url).then(
       response => response.json()
       ).then(data => {
         console.log(data);
-        const amount = document.querySelector('#amount').textContent;
-        const exchange = document.querySelector('#exchange');
-        const value = data[`${convertFrom.value}_${convertTo.value}`];
+        const value = data[pair];
+        rates[pair] = value;
         exchange.textContent = amount * value
-      }).catch(error => {
-        console.log(error);
-        fetch(api.fixer.endpoints.latest).then(
-          response => response.json()
-          ).then(({rates}) => {
-            console.log(`fixer: ${rates}`);
-            const amount = document.querySelector('#amount').textContent;
-            const exchange = document.querySelector('#exchange');
-            const val = convertTo.value;
+      });//.catch(error => {
+      //   console.log(error);
+      //   fetch(api.fixer.endpoints.latest).then(
+      //     response => response.json()
+      //     ).then(({rates}) => {
+      //       console.log(`fixer: ${rates}`);
+      //       const val = convertTo.value;
             
-            exchange.textContent = amount * rates[`${val}`];
-          });
-      });
-    };
+      //       exchange.textContent = amount * rates[`${val}`];
+      //     });
+      // });
+    }
+  };
     
     //  QUICKLY APPLY CONVERSION RATE CHANGES
     const screenForms = document.querySelectorAll('.screen-forms');
     const forEach = Array.prototype.forEach;
     forEach.call(screenForms, form => {
-      form.onchange = rates;
+      form.onchange = getRate;
     });
     
     const buttons = document.querySelectorAll('.input-btn');
@@ -77,37 +84,37 @@ window.addEventListener('DOMContentLoaded', () => {
         if(amount.textContent.length < 1)
           return exchange.textContent = '';
 
-        rates();
+        getRate();
     };
   });
 });
 
-/*
+
 if(navigator.serviceWorker){
-navigator.serviceWorker.register('sw.js').then(reg => {
-  console.log('success')
+  navigator.serviceWorker.register('sw.js').then(reg => {
+    console.log('sw reg success')
   if (!navigator.serviceWorker.controller){
     return;
   }
 
-  if(reg.waiting){
-    //TODO
-    //Show notification for updates
-  }
+//   if(reg.waiting){
+//     //TODO
+//     //Show notification for updates
+//   }
 
-  if(reg.installing){
-    //TODO
-    //Track Installation and show notification when updates are ready
-  }
+//   if(reg.installing){
+//     //TODO
+//     //Track Installation and show notification when updates are ready
+//   }
 
-  reg.installing.addEventListener('updatefound', event => {
-    console.log(event);
-  });
-}).catch(err => {
-    console.log('failed to register');
+//   reg.installing.addEventListener('updatefound', event => {
+//     console.log(event);
+//   });
+// }).catch(err => {
+//     console.log('failed to register');
   });
 }
 
-navigator.serviceWorker.controller.addEventListener('controllerchange', event => {
+// navigator.serviceWorker.controller.addEventListener('controllerchange', event => {
 
-});*/
+// });
