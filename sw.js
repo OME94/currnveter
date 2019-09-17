@@ -1,24 +1,52 @@
+const staticCacheName = 'currnverter-static-v1';
+
 self.addEventListener('install', event => {
-    event.waitUntil(
-        //Make a cache for static resources
-        console.log(event) //Make sure to return a Promise
-    );
+	const cachedUrls = [
+		'/',
+		'currnverter.css',
+		'index.js'
+	];
+		
+	console.log(event) //Make sure to return a Promise
+	
+	event.waitUntil(
+		//Make a cache for static resources
+		caches.open(staticCacheName).then(
+			cache => cache.addAll(cachedUrls))
+	);
+	
+	console.log('installed');
 });
 
 self.addEventListener('activate', event => {
-    event.waitUntil(console.log(event)); //Ensure to return a Promise
+	console.log(event)	
+	
+	event.waitUntil(caches.keys().then(
+		cacheNames => {
+			return Promise.all(cacheNames.filter(
+				cacheName => (cacheName.startsWith('currnverter-') && 
+				cacheName !== staticCacheName)
+				).map(cacheName => caches.delete(cacheName))
+			);
+		})
+	);
+	
+	console.log('activated');
 });
-
-self.addEventListener('message', event => {
-    //Take messages and take actions for:
-    //skipWaiting
-    //user interractions
-})
 
 self.addEventListener('fetch', event => {
-    console.log(event);
+	console.log(event);
+	event.waitUntil(caches.match(event.request).then(
+		response => (response || fetch(event.request))
+		)
+	);
 });
-
+	
+// self.addEventListener('message', event => {
+//     //Take messages and take actions for:
+//     //skipWaiting
+//     //user interractions
+// })
 /*
 self.registration.showNotification('Notification Title', {
     //Notification options
