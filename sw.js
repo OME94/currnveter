@@ -1,20 +1,18 @@
-const staticCacheName = 'currnverter-static-v1';
+const staticCacheName = 'currnverter-static-v2';
 
 self.addEventListener('install', event => {
+	console.log(event);
+
 	const cachedUrls = [
 		'/',
 		'currnverter.css',
 		'index.js'
 	];
-		
-	console.log(event) //Make sure to return a Promise
-	
 	event.waitUntil(
 		//Make a cache for static resources
 		caches.open(staticCacheName).then(
 			cache => cache.addAll(cachedUrls))
 	);
-	
 	console.log('installed');
 });
 
@@ -42,11 +40,14 @@ self.addEventListener('fetch', event => {
 	);
 });
 	
-// self.addEventListener('message', event => {
-//     //Take messages and take actions for:
-//     //skipWaiting
-//     //user interractions
-// })
+self.addEventListener('message', event => {
+	// Take messages and take actions for:
+	// skipWaiting
+	// user interractions
+	console.log(event, event.data);
+	if(event.data.action == 'skipWaiting') self.skipWaiting();
+});
+
 /*
 self.registration.showNotification('Notification Title', {
     //Notification options

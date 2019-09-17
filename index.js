@@ -93,28 +93,44 @@ window.addEventListener('DOMContentLoaded', () => {
 if(navigator.serviceWorker){
   navigator.serviceWorker.register('sw.js').then(reg => {
     console.log('sw reg success')
-  if (!navigator.serviceWorker.controller){
-    return;
-  }
+    if (!navigator.serviceWorker.controller) return;
 
-//   if(reg.waiting){
-//     //TODO
-//     //Show notification for updates
-//   }
+        // TODO
+        // Show notification for updates
+    if(reg.waiting){
+      updateSw(reg.waiting);
+      console.log('waiting sw updated');
+      return;
+    }
 
-//   if(reg.installing){
-//     //TODO
-//     //Track Installation and show notification when updates are ready
-//   }
+    if(reg.installing){
+      trackSw(reg.installing);
+      return;
+    }
 
-//   reg.installing.addEventListener('updatefound', event => {
-//     console.log(event);
-//   });
-// }).catch(err => {
-//     console.log('failed to register');
+    reg.addEventListener('updatefound', event => {
+      console.log(event);
+      trackSw(reg.installing);
+    });
+  }).catch(err => {
+    console.log('failed to register', err);
   });
 }
 
-// navigator.serviceWorker.controller.addEventListener('controllerchange', event => {
+navigator.serviceWorker.controller.addEventListener('controllerchange', event => {
+  console.log(event);
+  window.location.reload();
+});
 
-// });
+function trackSw(sw){
+  sw.addEventListener('statechange', function(event){
+    console.log(event);
+    if(this.state == 'installed') updateSw(this);
+    
+    console.log('updated')
+  });
+}
+
+function updateSw(sw){
+  sw.postMessage({action: 'skipWaiting'});
+}
