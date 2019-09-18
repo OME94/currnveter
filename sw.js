@@ -1,4 +1,4 @@
-const staticCacheName = 'currnverter-static-v2';
+const staticCacheName = 'currnverter-static-v1';
 
 self.addEventListener('install', event => {
 	console.log(event);
