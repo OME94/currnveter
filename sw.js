@@ -5,8 +5,8 @@ self.addEventListener('install', event => {
 
 	const cachedUrls = [
 		'/',
-		'/currnverter.css',
-		'/index.js'
+		'/css/currnverter.css',
+		'/js/index.js'
 	];
 	event.waitUntil(
 		//Make a cache for static resources
