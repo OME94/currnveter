@@ -4,7 +4,7 @@ self.addEventListener('install', event => {
 	console.log(event);
 
 	const cachedUrls = [
-		// '/currnverter',
+		'./',
 		'./css/currnverter.css',
 		'./js/index.js'
 	];
