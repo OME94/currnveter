@@ -5,8 +5,8 @@ self.addEventListener('install', event => {
 
 	const cachedUrls = [
 		'/',
-		'currnverter.css',
-		'index.js'
+		'/currnverter.css',
+		'/index.js'
 	];
 	event.waitUntil(
 		//Make a cache for static resources
@@ -41,9 +41,9 @@ self.addEventListener('fetch', event => {
 });
 	
 self.addEventListener('message', event => {
-	// Take messages and take actions for:
+	// Take messages and take actions for :
 	// skipWaiting
-	// user interractions
+	// User Interractions
 	console.log(event, event.data);
 	if(event.data.action == 'skipWaiting') self.skipWaiting();
 });
