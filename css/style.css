@@ -1,0 +1,39 @@
+html, body{
+    margin: 0;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+body{
+    display: grid;
+    grid: "header" min-content
+          "main" auto
+          "footer" min-content /
+          1fr;
+    /* justify-content: space-between; */
+}
+
+body > *{
+    border: 1px solid greenyellow;
+}
+
+main{
+    margin: 0;
+    display: grid;
+    justify-content: space-around;
+}
+
+main > *{
+    border: 1px solid yellow;
+}
+
+#screen{
+    display: grid;
+    grid: 1fr 1fr / 1fr;
+}
+
+#buttons{
+    display: grid;
+    grid: auto-flow 2em / repeat(3, 10em);
+    gap: 1em;
+}
