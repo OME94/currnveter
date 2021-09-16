@@ -1,3 +1,7 @@
+*{
+    border: none;
+}
+
 html, body{
     margin: 0;
     height: 100%;
@@ -10,21 +14,19 @@ body{
           "main" auto
           "footer" min-content /
           1fr;
-    /* justify-content: space-between; */
+    justify-content: space-around;
 }
 
-body > *{
-    border: 1px solid greenyellow;
+header{
+    background-color: #000;
+    color: #fff;
 }
 
 main{
     margin: 0;
     display: grid;
+    grid: auto-flow auto / 1fr;
     justify-content: space-around;
-}
-
-main > *{
-    border: 1px solid yellow;
 }
 
 #screen{
@@ -32,8 +34,19 @@ main > *{
     grid: 1fr 1fr / 1fr;
 }
 
+input{
+    border: 1px solid black;
+}
+
 #buttons{
     display: grid;
-    grid: auto-flow 2em / repeat(3, 10em);
+    grid: auto-flow 4em / repeat(3, 1fr);
     gap: 1em;
+    justify-content: space-evenly;
+    background-color: #afafaf;
+}
+
+button{
+    background-color: #000;
+    color: #fff;
 }

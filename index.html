@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/style.css">
     <title>Currnverter</title>
+    <script src="./js/index.js"></script>
 </head>
 <body>
     <header>
@@ -13,8 +14,35 @@
     </header>
     <main>
         <section id="screen">
-            <section id="currency"></section>
-            <section id="quote"></section>
+            <section id="amount-box">
+                <form class="screen-forms" id="convert-from-form">
+                    <!-- 
+                        Transform this datalist form to a button-like interface,
+                        where the currencies represented as countries/currencies buttons 
+                     -->
+                    <input name="convert-from" id="convert-from" list="currencies">
+                </form>
+                <div class="values" id="amount"></div>
+            </section>
+            <section id="quote-box">
+                <form class="screen-forms" id="convert-to-form">
+                <!-- 
+                    Transform this datalist form to a button-like interface,
+                    where the currencies represented as countries/currencies buttons 
+                    -->
+                <input name="convert-to" id="convert-to" list="currencies">
+                </form>
+                <div class="values" id="quote"></div>
+            </section>
+            <datalist id="currencies">
+                <option value="GBP">
+                <option value="GHC">
+                <option value="CFA">
+                <option value="EUR">
+                <option value="NGN">
+                <option value="USD">
+                <option value="YEN">
+            </datalist>
         </section>
         <section id="buttons">
             <button>1</button>
@@ -28,7 +56,7 @@
             <button>9</button>
             <button>.</button>
             <button>0</button>
-            <button>&larr;</button>
+            <button id="del">&larr;<br>del</button>
         </section>
     </main>
     <footer></footer>
