@@ -12,8 +12,8 @@
     <header>
         <h1><strong> CurrnVerter</strong> </h1>
     </header>
-    <section id="converter-calculator">
-        <div id="screen">
+    <main>
+        <section id="screen">
             <div id="screen-top">
                 <form class="screen-forms" id="convert-from-form">
                     <input name="convert-from" id="convert-from" list="currencies">
@@ -27,17 +27,17 @@
                         <option value="YEN">
                     </datalist>
                 </form>
-                <div class="converts" id="amount"></div>
+                <div class="values" id="amount"></div>
             </div>
             <div id="screen-bottom">
                 <form class="screen-forms" id="convert-to-form">
                     <input name="convert-to" id="convert-to" list="currencies">
                 </form>
-                <div class="converts" id="exchange"></div>
+                <div class="values" id="exchange"></div>
             </div>
-        </div>
+        </section>
 
-        <div id="buttons">
+        <section id="buttons">
            <button class="input-btn">1</button>
            <button class="input-btn">2</button>
            <button class="input-btn">3</button>
@@ -50,8 +50,8 @@
            <button class="input-btn">.</button>
            <button class="input-btn">0</button>
            <button class="input-btn">&larr;<br>del</button>
-        </div>
-    </section>
+        </section>
+    </main>
 </body>
 
 </html>
