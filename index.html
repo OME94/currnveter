@@ -7,27 +7,26 @@
     <link rel="stylesheet" type="text/css" href="./css/currnverter.css">
     <script type="text/javascript" src="./js/index.js"></script>
 </head>
-
 <body>
     <header>
         <h1><strong> CurrnVerter</strong> </h1>
     </header>
-    <section id="converter-calculator">
-        <div id="screen">
-            <form class="screen-forms">
-                <div id="screen-top">
-                    <input name="convert-from" id="convert-from" list="currencies">
-                    <div class="converts" id="amount"></div>
-                </div>
-                <div id="screen-bottom">
-                    <input name="convert-to" id="convert-to" list="currencies">
-                    <div class="converts" id="exchange"></div>
-                </div>
-                <datalist id="currencies"></datalist>
-            </form>
-        </div>
-
-        <div id="buttons">
+    <main>
+        <section id="converter-calculator">
+            <div id="screen">
+                <form class="screen-forms">
+                    <div id="screen-top">
+                        <input name="convert-from" id="convert-from" list="currencies">
+                        <div class="converts" id="amount"></div>
+                    </div>
+                    <div id="screen-bottom">
+                        <input name="convert-to" id="convert-to" list="currencies">
+                        <div class="converts" id="exchange"></div>
+                    </div>
+                    <datalist id="currencies"></datalist>
+                </form>
+            </div>
+        <section id="buttons">
            <button class="input-btn">1</button>
            <button class="input-btn">2</button>
            <button class="input-btn">3</button>
@@ -40,8 +39,8 @@
            <button class="input-btn">.</button>
            <button class="input-btn">0</button>
            <button class="input-btn">&larr;<br>del</button>
-        </div>
-    </section>
+        </section>
+    </main>
 </body>
 
 </html>
