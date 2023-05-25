@@ -14,27 +14,17 @@
     </header>
     <section id="converter-calculator">
         <div id="screen">
-            <div id="screen-top">
-                <form class="screen-forms" id="convert-from-form">
+            <form class="screen-forms">
+                <div id="screen-top">
                     <input name="convert-from" id="convert-from" list="currencies">
-                    <datalist id="currencies">
-                        <option value="GBP">
-                        <option value="GHC">
-                        <option value="CFA">
-                        <option value="EUR">
-                        <option value="NGN">
-                        <option value="USD">
-                        <option value="YEN">
-                    </datalist>
-                </form>
-                <div class="converts" id="amount"></div>
-            </div>
-            <div id="screen-bottom">
-                <form class="screen-forms" id="convert-to-form">
+                    <div class="converts" id="amount"></div>
+                </div>
+                <div id="screen-bottom">
                     <input name="convert-to" id="convert-to" list="currencies">
-                </form>
-                <div class="converts" id="exchange"></div>
-            </div>
+                    <div class="converts" id="exchange"></div>
+                </div>
+                <datalist id="currencies"></datalist>
+            </form>
         </div>
 
         <div id="buttons">

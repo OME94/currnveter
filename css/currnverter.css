@@ -1,3 +1,10 @@
+/* 
+TO ADD : (1) THE SCREEN SHOULD BE ABLE TO ACCOMODATE THE 
+              TOTAL INPUT/CONVERSION OUTPUT WITHOUT
+              OVERFLOWING ITS BORDER
+*/
+
+
 body, *{
     margin: 0;
     padding: 0;
